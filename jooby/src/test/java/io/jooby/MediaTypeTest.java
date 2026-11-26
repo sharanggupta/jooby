@@ -262,6 +262,17 @@ public class MediaTypeTest {
   }
 
   @Test
+  public void byFileIgnoresExtensionCase() {
+    assertEquals(MediaType.json, MediaType.byFile("DATA.JSON"));
+    assertEquals(MediaType.html, MediaType.byFile(Path.of("Index.Html")));
+    assertEquals(MediaType.valueOf("image/jpeg"), MediaType.byFile("IMG_0001.JPG"));
+
+    assertEquals(MediaType.json, MediaType.byFileExtension("JSON"));
+    assertEquals(MediaType.valueOf("image/png"), MediaType.byFileExtension("PNG", "text/plain"));
+    assertEquals(MediaType.text, MediaType.byFileExtension("UNKNOWNEXT", "text/plain"));
+  }
+
+  @Test
   public void comprehensiveExtensions() {
     assertEquals(MediaType.js, MediaType.byFileExtension("js"));
     assertEquals(MediaType.js, MediaType.byFileExtension("ts"));

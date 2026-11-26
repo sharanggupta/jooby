@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import org.jspecify.annotations.Nullable;
 
@@ -463,7 +464,7 @@ public final class MediaType implements Comparable<MediaType> {
    * @return Mediatype.
    */
   public static MediaType byFileExtension(String ext) {
-    return switch (ext) {
+    return switch (ext.toLowerCase(Locale.ROOT)) {
       case "spl" -> new MediaType("application/x-futuresplash", null);
       case "java" -> text;
       case "class" -> new MediaType("application/java-vm", null);
