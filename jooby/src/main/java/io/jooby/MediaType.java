@@ -147,7 +147,8 @@ public final class MediaType implements Comparable<MediaType> {
   }
 
   /**
-   * Get a parameter that matches the given name or <code>null</code>.
+   * Get a parameter that matches the given name or <code>null</code>. Parameter names are not
+   * case-sensitive.
    *
    * @param name Parameter name.
    * @return Parameter value or <code>null</code>.
@@ -162,7 +163,7 @@ public final class MediaType implements Comparable<MediaType> {
         if (paramValueEnd < 0) {
           paramValueEnd = raw.length();
         }
-        if (pname.equals(name)) {
+        if (pname.equalsIgnoreCase(name)) {
           return raw.substring(i + 1, paramValueEnd).trim();
         }
         paramStart = paramValueEnd + 1;

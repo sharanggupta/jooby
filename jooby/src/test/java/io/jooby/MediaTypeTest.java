@@ -113,6 +113,15 @@ public class MediaTypeTest {
   }
 
   @Test
+  public void getParameterIgnoresNameCase() {
+    MediaType t = MediaType.valueOf("text/plain; Charset=ISO-8859-1; Q=0.5");
+    assertEquals("ISO-8859-1", t.getParameter("charset"));
+    assertEquals("ISO-8859-1", t.getParameter("CHARSET"));
+    assertEquals("ISO-8859-1", t.getCharset().name());
+    assertEquals(.5f, t.getQuality());
+  }
+
+  @Test
   public void getParameter() {
     MediaType t = MediaType.valueOf("application/json; q=0.8; charset=utf-8; foo=bar");
     assertEquals("0.8", t.getParameter("q"));
